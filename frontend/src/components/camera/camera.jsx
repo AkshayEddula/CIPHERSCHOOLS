@@ -26,7 +26,6 @@ const CameraAndMicrophone = () => {
 
     return (
         <div>
-            <h1 className='text-lg font-medium text-gray-800'>Camera Preview</h1>
             {error && <p>{error}</p>}
             <video
                 className='rounded mt-1'

@@ -11,17 +11,15 @@ function App() {
     const navigate = useNavigate();
     const { isLoggedIn } = useContext(UserContext);
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem('token');
-    //     // Update isLoggedIn based on token presence
-    //     if (token) {
-    //         // Assuming isLoggedIn is determined by token presence
-    //         // If you need more sophisticated checks, you can add them here
-    //         navigate('/');
-    //     } else {
-    //         navigate('/auth/login');
-    //     }
-    // }, [isLoggedIn, navigate]);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        // Update isLoggedIn based on token presence
+        if (token) {
+            navigate('/');
+        } else {
+            navigate('/auth/login');
+        }
+    }, [isLoggedIn]);
 
     return (
         <Routes>
