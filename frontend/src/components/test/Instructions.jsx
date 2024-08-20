@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import Nav from '../Nav/Nav';
 import { UserContext } from '../../context/context';
 import { Link } from 'react-router-dom';
@@ -23,13 +23,25 @@ const Instructions = () => {
 
     const handleMediaPermission = async () => {
         try {
+            // Clean up existing stream if any
+            if (videoRef.current && videoRef.current.srcObject) {
+                const stream = videoRef.current.srcObject;
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+
+            // Request new media stream
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
                 audio: true
             });
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
+                videoRef.current.onloadedmetadata = () => {
+                    videoRef.current.play();
+                };
             }
+
             setAllowMedia(true);
         } catch (error) {
             console.log(error);
@@ -43,6 +55,17 @@ const Instructions = () => {
             setIsChecked(!isChecked);
         }
     };
+
+    // Cleanup media stream on component unmount
+    useEffect(() => {
+        return () => {
+            if (videoRef.current && videoRef.current.srcObject) {
+                const stream = videoRef.current.srcObject;
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+        };
+    }, [videoRef]);
 
     return (
         <div>
@@ -89,11 +112,17 @@ const Instructions = () => {
                 </div>
                 <div className='absolute bottom-0 right-5'>
                     {allowMedia && (
-                            <div className="mt-4">
-                                <h1 className='text-xl font-semibold'>Camera Preview</h1>
-                                <video ref={videoRef} autoPlay muted className="rounded-lg w-64 h-48 bg-black" />
-                            </div>
-                        )}
+                        <div className="mt-4">
+                            <h1 className='text-xl font-semibold'>Camera Preview</h1>
+                            <video
+                                ref={videoRef}
+                                autoPlay
+                                muted
+                                className="rounded-lg w-64 h-48 bg-black"
+                                style={{ display: allowMedia ? 'block' : 'none' }} // Ensure visibility
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

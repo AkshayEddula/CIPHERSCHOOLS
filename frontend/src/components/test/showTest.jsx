@@ -17,9 +17,9 @@ const ShowTest = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [visitedQuestions, setVisitedQuestions] = useState(new Set());
     const [name, setname] = useState();
+    const [mediaStream, setMediaStream] = useState(null); // Track media stream
     const navigate = useNavigate();
 
-    // Fetch test data using react-query
     const { data: testData, error, isLoading } = useQuery(
         ['testData', testId],
         () => retrieveTest(testId),
@@ -30,40 +30,44 @@ const ShowTest = () => {
         }
     );
 
-    // Define handleTimeUp function
     const handleTimeUp = () => {
         alert("Time's up! The test will be submitted.");
     };
 
-    // Define mutation for submitting test data
     const mutation = useMutation(
         (submissionData) => axios.post('https://cipherschools-uaa0.onrender.com/test/writetest/submittest', submissionData),
         {
             onSuccess: () => {
                 alert("Test submitted successfully");
+                stopMediaStream(); // Stop media stream on successful submission
                 navigate('/');
             },
         }
     );
 
-    // Handle option change for local questions
     const handleOptionChangeLocal = (option) => {
         const questionId = testData.questions[currentQuestionIndex]._id;
         handleOptionChange(questionId, option);
     };
 
-    // Handle question navigation
     const handleQuestionClick = (index) => {
         setVisitedQuestions((prev) => new Set(prev.add(index)));
         setCurrentQuestionIndex(index);
     };
 
-    // Handle form submission
     const submitHandle = () => {
         const submission = { testId: testId, userId: userId, selections: selectedAnswers };
         setSubmissionData(submission);
         console.log(submission);
         mutation.mutate(submission);
+    };
+
+    // Function to stop media stream
+    const stopMediaStream = () => {
+        if (mediaStream) {
+            mediaStream.getTracks().forEach(track => track.stop());
+            setMediaStream(null);
+        }
     };
 
     if (isLoading) return <div className='text-2xl text-center'>Fetching test data...</div>;
@@ -141,7 +145,7 @@ const ShowTest = () => {
                         </div>
                     </div>
                     <div className='absolute bottom-5 right-5'>
-                        <CameraAndMicrophone />
+                        <CameraAndMicrophone setMediaStream={setMediaStream} />
                     </div>
                 </div>
             </div>

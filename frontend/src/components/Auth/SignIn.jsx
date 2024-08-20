@@ -50,9 +50,11 @@ const SignIn = () => {
                 <div className='font-sans flex flex-col gap-8'>
                     <div className='text-2xl font-extrabold tracking-widest text-purple-800'>Paperwrite</div>
                     <div className='flex flex-col'>
-                        <div className='flex flex-col gap-5'>
-                            <h1 className='text-2xl font-bold'>Sign Up</h1>
+                        <div className='flex flex-col gap-4'>
+                            <h1 className='text-2xl font-bold'>Sign In</h1>
                             <h2 className='text-xl font-medium'>Enter your Email and Password to Sign In</h2>
+                            <h2 className='text-lg'>Use <span className='text-purple-700 font-semibold'>sampletest@gmail.com</span> as your Email. </h2>
+                            <h2 className='text-lg'>Use <span className='text-purple-700 font-semibold'>sampletest</span> as your Password. For Testing. </h2>
                         </div>
                         <div className='mt-10'>
                             <form onSubmit={signInHandle} className='flex flex-col gap-3'>
@@ -69,7 +71,7 @@ const SignIn = () => {
                                 <label>Password</label>
                                 <input className='p-3 border-2 border-purple-400 rounded outline-none' type='password' name='password' value={signinData.password} onChange={handleSigninChange} required />
 
-                                <button className={`mt-3 bg-purple-600 px-0 p-3 text-white font-medium text-lg rounded ${isLoading ? 'disabled bg-purple-700' : ''}`}>Sign Up</button>
+                                <button className={`mt-3 bg-purple-600 px-0 p-3 text-white font-medium text-lg rounded ${isLoading ? 'disabled bg-purple-700' : ''}`}>Sign In</button>
                             </form>
                         </div>
                         <div className='text-center mt-5 font-medium'>
