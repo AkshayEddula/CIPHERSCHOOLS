@@ -7,7 +7,7 @@ import CameraAndMicrophone from '../camera/camera.jsx';
 import { useNavigate } from 'react-router-dom';
 
 const retrieveTest = async (id) => {
-    const response = await axios.get(`http://localhost:5000/test/writetest/${id}`);
+    const response = await axios.get(`https://cipherschools-uaa0.onrender.com/test/writetest/${id}`);
     return response.data;
 };
 
@@ -36,7 +36,7 @@ const ShowTest = () => {
 
     // Define mutation for submitting test data
     const mutation = useMutation(
-        (submissionData) => axios.post('http://localhost:5000/test/writetest/submittest', submissionData),
+        (submissionData) => axios.post('https://cipherschools-uaa0.onrender.com/test/writetest/submittest', submissionData),
         {
             onSuccess: () => {
                 alert("Test submitted successfully");

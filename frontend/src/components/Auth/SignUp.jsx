@@ -14,7 +14,7 @@ const SignUp = () => {
 
     // define mutation for signup
     const { mutate, isLoading } = useMutation(
-        (newUser) => axios.post('http://localhost:5000/auth/signup', newUser),
+        (newUser) => axios.post('https://cipherschools-uaa0.onrender.com/auth/signup', newUser),
         {
             onSuccess: () => {
                 queryClient.invalidateQueries();

@@ -22,7 +22,7 @@ const SignIn = () => {
 
 
     const { mutate, isLoading } = useMutation(
-        (user) => axios.post(`http://localhost:5000/auth/login`, user),
+        (user) => axios.post(`https://cipherschools-uaa0.onrender.com/auth/login`, user),
         {
             onSuccess: (response) => {
                 queryClient.invalidateQueries();
