@@ -54,7 +54,21 @@ const evaluateAndSendEmails = async () => {
           from: process.env.EMAIL,
           to: user.email,
           subject: 'Your Test Score',
-          text: `Dear ${user.name},\n\nYour test score for the test titled "${test.title}" is ${score}.\n\nBest regards,\nYour Test Platform`
+          html: `
+                <div class="container">
+                    <div class="header">
+                        <h1>Test Evaluation Results</h1>
+                    </div>
+                    <p>Dear ${user.name},</p>
+                    <p>Thank you for completing the test. Here are your results:</p>
+                    <ul>
+                        <li><strong>Score:</strong> ${test.name}</li>
+                        <li><strong>Score:</strong> ${score}</li>
+                    </ul>
+                    <p>We hope you are satisfied with your performance. If you have any questions or need further clarification, feel free to reach out.</p>
+                    <p class="footer">Best Regards,<br/>CIPHER SCHOOLS ASSIGNMENT</p>
+                </div>
+          `
         };
 
         await transporter.sendMail(mailOptions);
