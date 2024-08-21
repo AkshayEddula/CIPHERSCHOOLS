@@ -44,6 +44,7 @@ Ensure you have the following installed on your machine:
 
 2. Install the dependencies:
    ```bash
+   run this in both frontend and backend folders
    npm install
    ```
    or
