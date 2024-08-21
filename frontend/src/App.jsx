@@ -13,11 +13,10 @@ function App() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        // Update isLoggedIn based on token presence
         if (token) {
             navigate('/');
         } else {
-            navigate('/auth/login');
+            navigate('auth/login');
         }
     }, [isLoggedIn]);
 

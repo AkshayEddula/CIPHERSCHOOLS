@@ -80,3 +80,5 @@ const evaluateAndSendEmails = async () => {
   };
 
 cron.schedule('0 * * * *', evaluateAndSendEmails);
+
+evaluateAndSendEmails();

@@ -50,6 +50,11 @@ const Instructions = () => {
         }
     };
 
+    const cameraHandle = () => {
+        handleMediaPermission();
+        handleMediaPermission();
+    }
+
     const handleCheckboxChange = (e) => {
         if (e.target.name === "instructions") {
             setIsChecked(!isChecked);
@@ -94,7 +99,7 @@ const Instructions = () => {
                     {/* Media access section */}
                     <div className='mt-3 flex flex-col items-center gap-3'>
                         <button
-                            onClick={handleMediaPermission}
+                            onClick={cameraHandle}
                             className='bg-purple-400 text-xl text-white font-medium p-2 px-4 rounded'
                         >
                             Allow Access to Camera and Microphone
