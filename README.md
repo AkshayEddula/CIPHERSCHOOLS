@@ -12,6 +12,10 @@ This project is a web-based online test application built using React.js. The ap
 - **Timed Test**: A timer counts down the time available for the test. If the time runs out, the test is automatically submitted.
 - **Test Submission**: Users can answer multiple-choice questions and submit the test. The test data is sent to a backend server for processing.
 
+## Email Template
+
+![Screenshot of the Email Template](/template.png)
+
 ## Technologies Used
 
 - **Frontend**: React.js, Tailwind CSS
